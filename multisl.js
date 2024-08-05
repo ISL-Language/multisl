@@ -1,5 +1,5 @@
-import ISLInterpreter from "../core/interpreter.js";
-import ISLExtension from "../core/extensions.js";
+import ISLInterpreter from "https://cdn.statically.io/gh/LightningLaser8/ISL/main/core/interpreter.js";
+import ISLExtension from "https://cdn.statically.io/gh/LightningLaser8/ISL/main/core/extensions.js";
 class MultISLExtension extends ISLExtension {
   threads = {};
   options = {};
