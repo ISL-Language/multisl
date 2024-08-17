@@ -1,5 +1,5 @@
-import ISLInterpreter from "https://cdn.statically.io/gh/LightningLaser8/ISL/main/core/interpreter.js";
-import ISLExtension from "https://cdn.statically.io/gh/LightningLaser8/ISL/main/core/extensions.js";
+import { ISLInterpreter, ISLError } from "https://cdn.jsdelivr.net/gh/LightningLaser8/ISL@main/core/interpreter.js";
+import { ISLExtension } from "https://cdn.jsdelivr.net/gh/LightningLaser8/ISL@main/core/extensions.js";
 class MultISLExtension extends ISLExtension {
   threads = {};
   options = {};
@@ -20,8 +20,8 @@ class MultISLExtension extends ISLExtension {
       "thread",
       function (interpreter, labels, threadName, ...isl) {
         if (labels.length !== 1) {
-          throw new Error(
-            "Cannot perform multiple thread operations at once, please only use one label at a time."
+          throw new ISLError(
+            "Cannot perform multiple thread operations at once, please only use one label at a time.", SyntaxError
           );
         }
         if (labels.includes("create")) {
@@ -32,12 +32,12 @@ class MultISLExtension extends ISLExtension {
           };
         } else {
           if (!this.threads[threadName]) {
-            throw new ReferenceError(
+            throw new ISLError(
               "Cannot " +
                 labels[0] +
                 " a nonexistent thread '" +
                 threadName +
-                "'"
+                "'", ReferenceError
             );
           }
         }
